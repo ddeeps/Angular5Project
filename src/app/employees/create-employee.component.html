@@ -56,12 +56,32 @@
 
       <div class="form-group">
         <label for="department">Department</label>
-            <select id="department" name="department" [(ngModel)]="department" class="form-control">
-              <option id="1">Help Desk</option>
-              <option id="2">HR</option>
-              <option id="3">IT</option>
-              <option id="4">Payroll</option>
-              </select>
+        <select id="department" name="department" [(ngModel)]="department" class="form-control">
+          <option *ngFor="let dept of departments" [value]="dept.id">
+            {{dept.name}}
+          </option>
+        </select>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-3">
+          <label for="dateOfBirth">Date of Birth</label>
+          <input id="dateOfBirth" name="dateOfBirth" [(ngModel)]="dateOfBirth" [bsConfig]="datePickerConfig" type="text" bsDatepicker
+            class="form-control">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="photoPath">Photo Path</label>
+        <input id="photoPath" name="photoPath" [(ngModel)]="photoPath" type="text" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <button type="button" class="btn btn-primary" (click)="togglePhoto()">{{display}} Preview</button>
+      </div>
+
+      <div class="form-group">
+        <img [src]="photoPath" height="200" width="200" *ngIf="previewPhoto" />
       </div>
     </div>
 
@@ -71,5 +91,3 @@
 
   </div>
 </form>
-
-{{employeeForm.value | json}}
